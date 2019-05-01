@@ -1,59 +1,47 @@
 <div class="[ container ]">
     <div class="[ row ]">
-       <section class="[ col-sm-12 ]">
-          <div class="[ carousel slide ]" data-ride="carousel" id="featured">
-             <ol class="[ carousel-indicators ]">
-                <li data-target="#featured" data-slide-to="0" class="active"></li>
-                <li data-target="#featured" data-slide-to="1"></li>
-                <li data-target="#featured" data-slide-to="2"></li>
-             </ol>
-             <div class="[ carousel-inner ]">
-                <div class="[ item active ]">
-                   <img src="assets/images/banner1.jpg" alt="banner 1">
-                </div>
-                <div class="[ item ]">
-                   <img src="assets/images/banner2.jpg" alt="banner 2">
-                </div>
-                <div class="[ item ]">
-                   <img src="assets/images/banner3.jpg" alt="banner 3">
-                </div>
-             </div>
-             <a class="[ left carousel-control ]" href="#featured" role="button" data-slide="prev">
-             <span class="[ glyphicon glyphicon-chevron-left ]"></span>
-             </a>
-             <a class="[ right carousel-control ]" href="#featured" role="button" data-slide="next">
-             <span class="[ glyphicon glyphicon-chevron-right ]"></span>
-             </a>
-          </div>
-       </section>
-    </div>
- </div>
- <div class="[ container ]">
-    <div class="[ row ]">
        <section class="[ col-xs-12 ]">
-          <form class="[ contactform ]">
+          <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" class="[ contactform ]">
+
              <div class="[ form-group ]">
                 <label for="inputName">Name</label>
-                <input class="[ form-control ] [ contactform__input ]" type="text" id="inputName" 
+                <input formControlName="name" class="[ form-control ] [ contactform__input ]" type="text" id="inputName" 
                    placeholder="Name">
+                   <div *ngIf="submitted && messageForm.controls.name.errors" class="contactform__error">
+                        <div *ngIf="messageForm.controls.name.errors.required">Your name is required</div>
+                   </div>
              </div>
              <div class="[ form-group ]">
                 <label for="inputLastName">Lastname</label>
-                <input class="[ form-control ] [ contactform__input ]" type="text" id="inputLastName" 
+                <input formControlName="lastname" class="[ form-control ] [ contactform__input ]" type="text" id="inputLastName" 
                    placeholder="Lastname">
+                   <div *ngIf="submitted && messageForm.controls.lastname.errors" class="contactform__error">
+                        <div *ngIf="messageForm.controls.lastname.errors.required">Your lastname is required</div>
+                    </div>
              </div>
              <div class="[ form-group ]">
                 <label for="inputPhone">Phone</label>
-                <input class="[ form-control ] [ contactform__input ]" type="number" id="inputPhone" 
+                <input formControlName="phone" class="[ form-control ] [ contactform__input ]" type="number" id="inputPhone" 
                    placeholder="Phone">
+                   <div *ngIf="submitted && messageForm.controls.phone.errors" class="contactform__error">
+                        <div *ngIf="messageForm.controls.phone.errors.required">Your phone number is required</div>
+                    </div>
              </div>
              <div class="[ form-group ]">
                 <label for="inputEmail" class="contactform__label--green">Email</label>
-                <input class="[ form-control ] [ contactform__input ] [ contactform__input--email ]" type="email" id="inputEmail" 
+                <input formControlName="email" class="[ form-control ] [ contactform__input ] [ contactform__input--email ]" type="email" id="inputEmail" 
                    placeholder="Email">
+                   <div *ngIf="submitted && messageForm.controls.email.errors" class="contactform__error">
+                        <div *ngIf="messageForm.controls.email.errors.required">Your email is required</div>
+                    </div>
              </div>
-             <input class="[ btn btn-default pull-right ] [ contactform__submit ]" type="submit" value="Contact Us">
+               <div class="[ input-place ]">
+                  <input class="[ btn btn-default] [ contactform__submit ]" type="submit" value="Contact Us">
+               </div>
           </form>
+         
+          <h3 *ngIf="success">Valid!</h3>
+          
        </section>
     </div>
  </div>
